@@ -28,7 +28,38 @@ class Lexer {
 
         switch (this.ch) {
             case "=":
-                tok = { Type: TokenEnum.ASSIGN, Literal: "=" };
+                if (this.peekChar() === "=") {
+                    this.readChar();
+                    tok = { Type: TokenEnum.EQ, Literal: "==" };
+                } else {
+                    tok = { Type: TokenEnum.ASSIGN, Literal: "=" };
+                }
+                break;
+            case "+":
+                tok = { Type: TokenEnum.PLUS, Literal: "+" };
+                break;
+            case "-":
+                tok = { Type: TokenEnum.MINUS, Literal: "-" };
+                break;
+            case "!":
+                if (this.peekChar() === "=") {
+                    this.readChar();
+                    tok = { Type: TokenEnum.NOT_EQ, Literal: "!=" };
+                } else {
+                    tok = { Type: TokenEnum.BANG, Literal: "!" };
+                }
+                break;
+            case "/":
+                tok = { Type: TokenEnum.SLASH, Literal: "/" };
+                break;
+            case "*":
+                tok = { Type: TokenEnum.ASTERISK, Literal: "*" };
+                break;
+            case "<":
+                tok = { Type: TokenEnum.LT, Literal: "<" };
+                break;
+            case ">":
+                tok = { Type: TokenEnum.GT, Literal: ">" };
                 break;
             case ";":
                 tok = { Type: TokenEnum.SEMICOLON, Literal: ";" };
@@ -41,9 +72,6 @@ class Lexer {
                 break;
             case ",":
                 tok = { Type: TokenEnum.COMMA, Literal: "," };
-                break;
-            case "+":
-                tok = { Type: TokenEnum.PLUS, Literal: "+" };
                 break;
             case "{":
                 tok = { Type: TokenEnum.LBRACE, Literal: "{" };
@@ -67,6 +95,14 @@ class Lexer {
         }
         this.readChar();
         return tok;
+    }
+
+    peekChar(): string {
+        if (this.readPosition >= this.input.length) {
+            return "\0";
+        } else {
+            return this.input[this.readPosition];
+        }
     }
 
     readNumber(): string {

@@ -34,6 +34,18 @@ describe("lexer tests", () => {
         };
         
         let result = add(five, ten);
+
+        !-/*5;
+        5 < 10 > 5;
+
+        if(5 < 10) {
+            return true;
+        } else {
+            return false;
+        }
+
+        10 == 10;
+        10 != 9;
         `;
         let tests = [
             { expectedType: TokenEnum.LET, expectedLiteral: "let" },
@@ -71,6 +83,43 @@ describe("lexer tests", () => {
             { expectedType: TokenEnum.COMMA, expectedLiteral: "," },
             { expectedType: TokenEnum.IDENT, expectedLiteral: "ten" },
             { expectedType: TokenEnum.RPAREN, expectedLiteral: ")" },
+            { expectedType: TokenEnum.SEMICOLON, expectedLiteral: ";" },
+            { expectedType: TokenEnum.BANG, expectedLiteral: "!" },
+            { expectedType: TokenEnum.MINUS, expectedLiteral: "-" },
+            { expectedType: TokenEnum.SLASH, expectedLiteral: "/" },
+            { expectedType: TokenEnum.ASTERISK, expectedLiteral: "*" },
+            { expectedType: TokenEnum.INT, expectedLiteral: "5" },
+            { expectedType: TokenEnum.SEMICOLON, expectedLiteral: ";" },
+            { expectedType: TokenEnum.INT, expectedLiteral: "5" },
+            { expectedType: TokenEnum.LT, expectedLiteral: "<" },
+            { expectedType: TokenEnum.INT, expectedLiteral: "10" },
+            { expectedType: TokenEnum.GT, expectedLiteral: ">" },
+            { expectedType: TokenEnum.INT, expectedLiteral: "5" },
+            { expectedType: TokenEnum.SEMICOLON, expectedLiteral: ";" },
+            { expectedType: TokenEnum.IF, expectedLiteral: "if" },
+            { expectedType: TokenEnum.LPAREN, expectedLiteral: "(" },
+            { expectedType: TokenEnum.INT, expectedLiteral: "5" },
+            { expectedType: TokenEnum.LT, expectedLiteral: "<" },
+            { expectedType: TokenEnum.INT, expectedLiteral: "10" },
+            { expectedType: TokenEnum.RPAREN, expectedLiteral: ")" },
+            { expectedType: TokenEnum.LBRACE, expectedLiteral: "{" },
+            { expectedType: TokenEnum.RETURN, expectedLiteral: "return" },
+            { expectedType: TokenEnum.TRUE, expectedLiteral: "true" },
+            { expectedType: TokenEnum.SEMICOLON, expectedLiteral: ";" },
+            { expectedType: TokenEnum.RBRACE, expectedLiteral: "}" },
+            { expectedType: TokenEnum.ELSE, expectedLiteral: "else" },
+            { expectedType: TokenEnum.LBRACE, expectedLiteral: "{" },
+            { expectedType: TokenEnum.RETURN, expectedLiteral: "return" },
+            { expectedType: TokenEnum.FALSE, expectedLiteral: "false" },
+            { expectedType: TokenEnum.SEMICOLON, expectedLiteral: ";" },
+            { expectedType: TokenEnum.RBRACE, expectedLiteral: "}" },
+            { expectedType: TokenEnum.INT, expectedLiteral: "10" },
+            { expectedType: TokenEnum.EQ, expectedLiteral: "==" },
+            { expectedType: TokenEnum.INT, expectedLiteral: "10" },
+            { expectedType: TokenEnum.SEMICOLON, expectedLiteral: ";" },
+            { expectedType: TokenEnum.INT, expectedLiteral: "10" },
+            { expectedType: TokenEnum.NOT_EQ, expectedLiteral: "!=" },
+            { expectedType: TokenEnum.INT, expectedLiteral: "9" },
             { expectedType: TokenEnum.SEMICOLON, expectedLiteral: ";" },
             { expectedType: TokenEnum.EOF, expectedLiteral: "\0" },
         ];

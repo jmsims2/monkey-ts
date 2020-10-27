@@ -10,6 +10,14 @@ export const enum TokenEnum {
     INT = "INT",
     ASSIGN = "=",
     PLUS = "+",
+    MINUS = "-",
+    BANG = "!",
+    ASTERISK = "*",
+    SLASH = "/",
+    LT = "<",
+    GT = ">",
+    EQ = "==",
+    NOT_EQ = "!=",
     COMMA = ",",
     SEMICOLON = ";",
     LPAREN = "(",
@@ -18,11 +26,21 @@ export const enum TokenEnum {
     RBRACE = "}",
     FUNCTION = "FUNCTION",
     LET = "LET",
+    TRUE = "TRUE",
+    FALSE = "FALSE",
+    IF = "IF",
+    ELSE = "ELSE",
+    RETURN = "RETURN",
 }
 
 const keywords: Map<string, TokenEnum> = new Map([
     ["fn", TokenEnum.FUNCTION],
     ["let", TokenEnum.LET],
+    ["true", TokenEnum.TRUE],
+    ["false", TokenEnum.FALSE],
+    ["if", TokenEnum.IF],
+    ["else", TokenEnum.ELSE],
+    ["return", TokenEnum.RETURN],
 ]);
 
 export const lookupIdentifier = (ident: string): TokenEnum => {
