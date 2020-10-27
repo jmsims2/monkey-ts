@@ -19,3 +19,12 @@ export const enum TokenEnum {
     FUNCTION = "FUNCTION",
     LET = "LET",
 }
+
+const keywords: Map<string, TokenEnum> = new Map([
+    ["fn", TokenEnum.FUNCTION],
+    ["let", TokenEnum.LET],
+]);
+
+export const lookupIdentifier = (ident: string): TokenEnum => {
+    return keywords.get(ident) ?? TokenEnum.IDENT;
+};

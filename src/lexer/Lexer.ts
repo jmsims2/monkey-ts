@@ -1,4 +1,5 @@
-import { Token, TokenEnum } from "./../token/token";
+import { isTemplateLiteralToken } from "typescript";
+import { Token, TokenEnum, lookupIdentifier } from "./../token/token";
 
 class Lexer {
     constructor(
@@ -22,6 +23,9 @@ class Lexer {
 
     nextToken(): Token {
         let tok: Token;
+
+        this.skipWhitespace();
+
         switch (this.ch) {
             case "=":
                 tok = { Type: TokenEnum.ASSIGN, Literal: "=" };
@@ -51,10 +55,55 @@ class Lexer {
                 tok = { Type: TokenEnum.EOF, Literal: "\0" };
                 break;
             default:
-                tok = { Type: TokenEnum.EOF, Literal: "\0" };
+                if (this.isLetter(this.ch)) {
+                    let Literal = this.readIdentifier();
+                    let Type = lookupIdentifier(Literal);
+                    return { Type, Literal };
+                } else if (this.isDigit(this.ch)) {
+                    return { Type: TokenEnum.INT, Literal: this.readNumber() };
+                } else {
+                    tok = { Type: TokenEnum.ILLEGAL, Literal: this.ch };
+                }
         }
         this.readChar();
         return tok;
+    }
+
+    readNumber(): string {
+        let pos = this.position;
+        while (this.isDigit(this.ch)) {
+            this.readChar();
+        }
+        return this.input.slice(pos, this.position);
+    }
+
+    isDigit(digit: string): boolean {
+        return "0123456789".includes(digit);
+    }
+
+    skipWhitespace(): void {
+        while (
+            this.ch === " " ||
+            this.ch === "\t" ||
+            this.ch === "\n" ||
+            this.ch === "\r"
+        ) {
+            this.readChar();
+        }
+    }
+
+    readIdentifier(): string {
+        let pos = this.position;
+        while (this.isLetter(this.ch)) {
+            this.readChar();
+        }
+        return this.input.slice(pos, this.position);
+    }
+
+    isLetter(ch: string): boolean {
+        return ch.match(/_|[a-zA-Z]/g)
+            ? ch.match(/_|[a-zA-Z]/g)!.length > 0
+            : false;
     }
 }
 
