@@ -1,4 +1,3 @@
-import { isTemplateLiteralToken } from "typescript";
 import { Token, TokenEnum, lookupIdentifier } from "./../token/token";
 
 class Lexer {
