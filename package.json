@@ -1,19 +1,21 @@
 {
-    "name": "monkey",
-    "version": "1.0.0",
-    "description": "Monkey Language implemented in TypeScript",
-    "main": "index.js",
-    "scripts": {
-        "test": "jest"
-    },
-    "author": "Jeff Sims",
-    "license": "ISC",
-    "devDependencies": {
-        "jest": "^26.6.1"
-    },
-    "dependencies": {
-        "@types/jest": "^26.0.15",
-        "ts-jest": "^26.4.2",
-        "typescript": "^4.0.3"
-    }
+  "name": "monkey",
+  "version": "1.0.0",
+  "description": "Monkey Language implemented in TypeScript",
+  "main": "index.ts",
+  "scripts": {
+    "test": "jest",
+    "start": "ts-node src/index.ts"
+  },
+  "author": "Jeff Sims",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^26.6.1",
+    "ts-node": "^9.1.1"
+  },
+  "dependencies": {
+    "@types/jest": "^26.0.15",
+    "ts-jest": "^26.4.2",
+    "typescript": "^4.0.3"
+  }
 }
